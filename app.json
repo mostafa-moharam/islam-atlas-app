@@ -2,13 +2,17 @@
   "expo": {
     "name": "mobile-app",
     "slug": "mobile-app",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "mobileapp",
     "userInterfaceStyle": "automatic",
     "ios": {
-      "icon": "./assets/expo.icon"
+      "icon": "./assets/expo.icon",
+      "bundleIdentifier": "com.anonymous.mobileapp",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -46,6 +50,7 @@
       "eas": {
         "projectId": "3e70a33a-6185-4dc7-8e8e-4af9f8354364"
       }
-    }
+    },
+    "owner": "islam-atlas"
   }
 }

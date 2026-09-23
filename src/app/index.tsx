@@ -1,4 +1,4 @@
-import { ThemeToggle } from "@/components/theme-toggle";
+import Navbar from "@/components/navbar";
 import { ScrollView, StyleSheet, Text } from "react-native";
 import "../../global.css";
 const App = () => {
@@ -8,7 +8,7 @@ const App = () => {
       contentContainerStyle={styles.contentContainer}
     >
       <Text className="text-primary">Hello World</Text>
-      <ThemeToggle />
+      <Navbar />
     </ScrollView>
   );
 };
