@@ -13,7 +13,7 @@ const QuranPage = () => {
       .finally(() => setLoading(false));
   }, []);
   const handleQuranContent = () => {
-    console.log(QuranPage);
+    console.log(quranPage);
   };
   return (
     <View>

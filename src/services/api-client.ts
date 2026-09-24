@@ -17,7 +17,7 @@ export async function apiClient<T>(
   };
 
   const response = await fetch(
-    `${"http://192.168.1.106:8000/api" + endpoint}`,
+    `http://192.168.1.106:8000/api${endpoint}`,
     defaultConfig,
   );
 
