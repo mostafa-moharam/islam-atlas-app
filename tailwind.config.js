@@ -1,29 +1,33 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./app/**/*.{js,jsx,ts,tsx}", "./components/**/*.{js,jsx,ts,tsx}"],
+  content: [
+    "./src/**/*.{js,jsx,ts,tsx}",
+    "./app/**/*.{js,jsx,ts,tsx}",
+    "./components/**/*.{js,jsx,ts,tsx}",
+  ],
   presets: [require("nativewind/preset")],
   darkMode: "class",
   theme: {
     extend: {
       colors: {
-        background: "rgb(var(--background) / <alpha-value>)",
-        container: "rgb(var(--container) / <alpha-value>)",
-        border: "rgb(var(--border) / <alpha-value>)",
+        background: "rgb(var(--background))",
+        container: "rgb(var(--container))",
+        border: "rgb(var(--border))",
 
         text: {
-          primary: "rgb(var(--text-primary) / <alpha-value>)",
-          secondary: "rgb(var(--text-secondary) / <alpha-value>)",
+          primary: "rgb(var(--text-primary))",
+          secondary: "rgb(var(--text-secondary))",
         },
-        foreground: "rgb(var(--text-primary) / <alpha-value>)",
-        muted: "rgb(var(--text-secondary) / <alpha-value>)",
+        foreground: "rgb(var(--text-primary))",
+        muted: "rgb(var(--text-secondary))",
         button: {
           primary: {
-            DEFAULT: "rgb(var(--button-primary-bg) / <alpha-value>)",
-            text: "rgb(var(--button-primary-text) / <alpha-value>)",
+            DEFAULT: "rgb(var(--button-primary-bg))",
+            text: "rgb(var(--button-primary-text))",
           },
           secondary: {
-            DEFAULT: "rgb(var(--button-secondary-bg) / <alpha-value>)",
-            text: "rgb(var(--button-secondary-text) / <alpha-value>)",
+            DEFAULT: "rgb(var(--button-secondary-bg))",
+            text: "rgb(var(--button-secondary-text))",
           },
         },
       },

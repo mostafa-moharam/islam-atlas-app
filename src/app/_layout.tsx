@@ -1,11 +1,26 @@
-import { DarkTheme, DefaultTheme, Stack, ThemeProvider } from "expo-router";
-import { useColorScheme } from "react-native";
+import Navbar from "@/components/navbar";
+import { Stack } from "expo-router";
+import { useColorScheme } from "nativewind";
+import { View } from "react-native";
+import "../../global.css";
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
+  const { colorScheme } = useColorScheme();
+
   return (
-    <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-      <Stack screenOptions={{ headerShown: false }} />
-    </ThemeProvider>
+    <View className={`flex-1 bg-background ${colorScheme}`}>
+      <View className="z-50 w-full">
+        <Navbar />
+      </View>
+
+      <View className="flex-1 bg-background">
+        <Stack
+          screenOptions={{
+            headerShown: false,
+            contentStyle: { backgroundColor: "transparent" },
+          }}
+        />
+      </View>
+    </View>
   );
 }

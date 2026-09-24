@@ -1,9 +1,7 @@
+import { Feather, Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useColorScheme } from "nativewind";
 import { useEffect, useState } from "react";
-import { HiOutlineDevicePhoneMobile } from "react-icons/hi2";
-import { IoIosMoon } from "react-icons/io";
-import { IoSunnyOutline } from "react-icons/io5";
 import { TouchableOpacity } from "react-native";
 
 type ThemeOption = "system" | "light" | "dark";
@@ -11,45 +9,59 @@ type ThemeOption = "system" | "light" | "dark";
 export function ThemeToggle() {
   const { colorScheme, setColorScheme } = useColorScheme();
   const [selectedTheme, setSelectedTheme] = useState<ThemeOption>("system");
+
+  // Fix: استخدام async function داخلية لتجنب خطأ effect.run
   useEffect(() => {
-    AsyncStorage.getItem("user-theme").then((savedTheme) => {
-      if (savedTheme) {
-        const theme = savedTheme as ThemeOption;
-        setSelectedTheme(theme);
-        setColorScheme(theme);
-      } else {
-        setSelectedTheme("system");
-        setColorScheme("system");
+    const loadSavedTheme = async () => {
+      try {
+        const savedTheme = await AsyncStorage.getItem("user-theme");
+        if (savedTheme) {
+          const theme = savedTheme as ThemeOption;
+          setSelectedTheme(theme);
+          setColorScheme(theme);
+        } else {
+          setSelectedTheme("system");
+          setColorScheme("system");
+        }
+      } catch (e) {
+        console.error("Failed to load theme", e);
       }
-    });
+    };
+
+    loadSavedTheme();
   }, []);
 
-  const handleThemeChange = () => {
+  const handleThemeChange = async () => {
+    let nextTheme: ThemeOption;
+
     if (selectedTheme === "system") {
-      setSelectedTheme("light");
-      setColorScheme("light");
+      nextTheme = "light";
     } else if (selectedTheme === "light") {
-      setSelectedTheme("dark");
-      setColorScheme("dark");
-    } else if (selectedTheme === "dark") {
-      setSelectedTheme("system");
-      setColorScheme("system");
+      nextTheme = "dark";
+    } else {
+      nextTheme = "system";
     }
-    console.log(colorScheme);
-    AsyncStorage.setItem("user-theme", selectedTheme);
+
+    setSelectedTheme(nextTheme);
+    setColorScheme(nextTheme);
+    await AsyncStorage.setItem("user-theme", nextTheme);
   };
 
   return (
     <TouchableOpacity
-      onPress={() => handleThemeChange()}
-      className={`p-2 rounded-md ${selectedTheme === "system" ? "bg-primary" : ""}`}
+      onPress={handleThemeChange}
+      className="p-2 rounded-md bg-container border border-border items-center justify-center"
     >
       {selectedTheme === "light" ? (
-        <IoSunnyOutline />
+        <Ionicons
+          name="sunny-outline"
+          size={20}
+          className="text-text-primary"
+        />
       ) : selectedTheme === "dark" ? (
-        <IoIosMoon />
+        <Ionicons name="moon-outline" size={20} className="text-text-primary" />
       ) : (
-        <HiOutlineDevicePhoneMobile />
+        <Feather name="smartphone" size={20} className="text-text-primary" />
       )}
     </TouchableOpacity>
   );

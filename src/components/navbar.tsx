@@ -1,13 +1,19 @@
-import { Text, View } from "react-native";
+import { useColorScheme } from "nativewind";
+import { StyleSheet, Text, View } from "react-native";
 import { ThemeToggle } from "./theme-toggle";
 
-const Navbar = () => {
+export default function Navbar() {
+  const { colorScheme } = useColorScheme();
   return (
-    <View className="h-6 fixed top-0 flex justify-evenly items-center">
-      <Text>Navebar</Text>
+    <View className="w-full flex-row items-center bg-container justify-between p-4 border-b border-border">
+      <Text className="text-lg font-bold text-text-primary">أطلس الإسلام</Text>
       <ThemeToggle />
     </View>
   );
-};
-
-export default Navbar;
+}
+const styles = StyleSheet.create({
+  title: {
+    fontSize: 24,
+    color: "red",
+  },
+});
